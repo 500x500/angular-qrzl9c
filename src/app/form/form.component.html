@@ -1,0 +1,37 @@
+<mat-card>
+      <form [formGroup]="formGroup" #stepper (ngSubmit)="onSubmit()">
+        <mat-horizontal-stepper formArrayName="usersArray" [linear]="false">
+          <div *ngFor="let user of usersArray.controls; let i = index" [formGroupName]="i">
+          <mat-step>
+            <ng-template matStepLabel>Fill out your name</ng-template>
+            <mat-form-field>
+              <input matInput placeholder="Last name, First name" formControlName="name" required>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </mat-step>
+
+          <mat-step>
+            <ng-template matStepLabel>Fill out your date of birth</ng-template>
+            <mat-form-field>
+              <input matInput placeholder="dob" formControlName="dob" required>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        You are now done.
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="addUser(); stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+          </div>
+        </mat-horizontal-stepper>
+      </form>
+</mat-card>
